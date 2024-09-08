@@ -13,6 +13,7 @@ Route::post('/admin/login', [AdminController::class, 'submit_login'])->name('adm
 Route::get('/admin/register', [AdminController::class, 'register'])->name('admin.register');
 Route::get('/admin/forget_password', [AdminController::class, 'forget_password'])->name('admin.forget_password');
 Route::get('/admin/setting', [AdminController::class, 'setting'])->name('admin.setting');
+Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 // Admin management routes for adding, editing, and deleting Admin users
 Route::get('admin/users/add', [AdminController::class, 'create'])->name('admin.users.add');

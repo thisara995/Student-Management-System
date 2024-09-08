@@ -19,6 +19,12 @@ class AdminController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ],
+
+        [
+            // Custom error messages
+            'email.required' => 'Email is required.',
+            'password.required' => 'Password is required.'
         ]);
 
         // Find the admin by email
@@ -32,6 +38,13 @@ class AdminController extends Controller
             return back()->withErrors(['email' => 'Invalid email or password']);
         }
     }
+
+    public function logout()
+    {
+        auth()->logout(); 
+        return redirect()->route('admin.login')->with('success', 'Logout successfully.');
+    }
+
 
     // Show register form for Admin
     public function register()

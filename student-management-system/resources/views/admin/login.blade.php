@@ -22,7 +22,16 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>
                                         @endif
-                                                                    
+
+
+                                    <!-- Display success message -->
+                                        @if (session('success'))
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <strong>{{ session('success') }}</strong>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        @endif
+                                                                                                            
                                         <div class="card-header">
                                         <h3 class="text-center font-weight-light my-4">Login</h3>
                                     </div>
