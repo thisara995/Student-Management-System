@@ -6,89 +6,76 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\View\View; // Ensure this import is included
-use Illuminate\Http\RedirectResponse; // Ensure this import is included
-
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
-    // Display the login form
-    public function showLoginForm()
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout', 'dashboard');
+    }
+
+    public function showLoginForm(): View
     {
         return view('admin.login');
     }
 
-    // Handle the login request
     public function login(Request $request): RedirectResponse
     {
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-        ], [
-            'email.required' => 'The email field is required.',
-            'email.email' => 'Please enter a valid email address.',
-            'password.required' => 'The password field is required.',
         ]);
 
-        $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate(); // Regenerate the session
-            return redirect()->intended('dashboard')->with('success', 'You have successfully logged in');
-        } else {
-            return redirect()->back()->withErrors(['email' => 'These credentials do not match our records.']);
+            $request->session()->regenerate();
+            return redirect()->intended(route('dashboard'));
         }
-    }
 
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
 
     public function dashboard(): View
     {
-        if (Auth::check()) {
-            return view('admin.dashboard');
-        }
-
-        return view('admin.login')->with('error', 'You are not allowed to access');
+        return view('admin.dashboard');
     }
 
-    // Display the registration form
-    public function registration()
+    public function showRegistrationForm(): View
     {
         return view('admin.register');
     }
 
-    // Handle registration logic
-    public function postRegistration(Request $request)
+    public function postRegistration(Request $request): RedirectResponse
     {
-        // Validate input
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed', // Confirm password validation
-            'role' => 'required|string' // Ensure the role is provided
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|string'
         ]);
 
-        // Create the user and automatically log in
-        $user = $this->create($request->all());
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'role' => $validatedData['role'],
+        ]);
+
         Auth::login($user);
 
-        // Redirect to dashboard after successful registration
-        return redirect()->route('dashboard')->with('success', 'Registration successful! You are now logged in.');
+        return redirect()->route('dashboard')->with('success', 'Registration successful!');
     }
 
-    // Create a new user instance
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => $data['role'],
-        ]);
-    }
-
-    // Handle logout
-    public function logout()
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('login')->with('success', 'Logged out successfully');
     }
 }

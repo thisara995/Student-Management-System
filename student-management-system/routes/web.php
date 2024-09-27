@@ -10,12 +10,20 @@ use App\Http\Controllers\AuthController;
 // Auth Routes
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('login', [AuthController::class, 'login']);
-Route::get('register', [AuthController::class, 'registration']);
-Route::post('post-register', [AuthController::class, 'postRegistration']);
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Registration routes
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'postRegistration']);
+
+// Dashboard route (protected by auth middleware)
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
+// Redirect root to login
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 
 // Student Routes

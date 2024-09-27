@@ -24,7 +24,7 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    <form action="{{ url('post-register') }}" method="POST" autocomplete="off">
+                                    <form action="{{ url('/register') }}" method="POST" autocomplete="off">
                                         @csrf 
                                         <div class="row mb-3">
                                             <div class="col-md-6">
