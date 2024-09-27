@@ -34,9 +34,9 @@
                 </a>
                 <div class="collapse" id="collapseTeacher" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="teacher-add.html">Add Teacher</a>
-                        <a class="nav-link" href="teacher-edit.html">Edit Teacher</a>
-                        <a class="nav-link" href="teacher-view.html">View Teachers</a>
+                        <a class="nav-link" href="{{url('/teachers/add')}}">Add Teacher</a>
+                        <a class="nav-link" href="{{url('/teachers/{id}/edit')}}">Edit Teacher</a>
+                        <a class="nav-link" href="{{url('/teachers')}}">View Teachers</a>
                     </nav>
                 </div>
 
@@ -49,9 +49,9 @@
                 </a>
                 <div class="collapse" id="collapseCourses" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="course-add.html">Add Course</a>
-                        <a class="nav-link" href="course-edit.html">Edit Course</a>
-                        <a class="nav-link" href="course-view.html">View Courses</a>
+                        <a class="nav-link" href="{{url('courses/add')}}">Add Course</a>
+                        <a class="nav-link" href="{{url('/courses/{id}/edit')}}">Edit Course</a>
+                        <a class="nav-link" href="{{url('/courses')}}">View Courses</a>
                     </nav>
                 </div>
 
@@ -101,7 +101,7 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
-            User Name
+            
         </div>
     </nav>
 </div>

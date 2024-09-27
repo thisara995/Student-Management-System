@@ -32,7 +32,7 @@
             <div class="col-lg-7 mx-auto">
                 <div class="card mt-2 mx-auto p-4 bg-light">
                     <div class="card-body bg-light">
-                        <form action="{{ url('/students/'.$student->id.'/update') }}" method="post" id="contact-form" role="form" autocomplete="off">
+                    <form action="{{ url('/students/'.$student->id.'/update') }}" method="post" id="contact-form" role="form" autocomplete="off">
                         @csrf
                         @method('PUT') 
 

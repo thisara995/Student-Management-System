@@ -35,9 +35,15 @@ class StudentController extends Controller
         return redirect()->route('students.list')->with('status', 'Student added successfully!');
     }
 
-    public function edit($id)
-    {    $student = Student::find($id);
-         return view('students.edit-student')->with('student', $student);
+    public function edit($id) {
+        $student = Student::find($id); // Find the student by id
+    
+        if (!$student) {
+            // Handle the case where student is not found
+            return redirect()->route('students.list')->with('error', 'Student not found.');
+        }
+    
+        return view('students.edit-student', compact('student')); // Pass student data to the view
     }
 
     public function update(Request $request, $id)

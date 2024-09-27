@@ -2,35 +2,52 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\AuthController;
 
 
+// Auth Routes
 
-// Admin Routes
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
-Route::post('/admin/login', [AdminController::class, 'submit_login'])->name('admin.submit_login');
-Route::get('/admin/register', [AdminController::class, 'register'])->name('admin.register');
-Route::get('/admin/forget_password', [AdminController::class, 'forget_password'])->name('admin.forget_password');
-Route::get('/admin/setting', [AdminController::class, 'setting'])->name('admin.setting');
-Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-
-// Admin management routes for adding, editing, and deleting Admin users
-Route::get('admin/users/add', [AdminController::class, 'create'])->name('admin.users.add');
-Route::post('admin/users/store', [AdminController::class, 'store'])->name('admin.users.store');
-Route::get('admin/users/{id}/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
-Route::put('admin/users/{id}/update', [AdminController::class, 'update'])->name('admin.users.update');
-Route::get('admin/users/{id}/view', [AdminController::class, 'show'])->name('admin.users.view');
-Route::delete('admin/users/{id}/delete', [AdminController::class, 'destroy'])->name('admin.users.delete');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::get('register', [AuthController::class, 'registration']);
+Route::post('post-register', [AuthController::class, 'postRegistration']);
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
 // Student Routes
-Route::get('/students', [StudentController::class, 'index'])->name('students.list');
-Route::get('/students/add', [StudentController::class, 'create'])->name('students.add');
-Route::post('/students/store', [StudentController::class, 'store'])->name('students.store');
-Route::get('/students/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
-Route::put('/students/{id}/update', [StudentController::class, 'update'])->name('students.update');
-Route::get('/students/{id}/view', [StudentController::class, 'show'])->name('students.view');
-Route::delete('/students/{id}/delete', [StudentController::class, 'destroy'])->name('students.delete');
+Route::prefix('students')->name('students.')->group(function () {
+    Route::get('/', [StudentController::class, 'index'])->name('list');
+    Route::get('/add', [StudentController::class, 'create'])->name('add');
+    Route::post('/store', [StudentController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [StudentController::class, 'edit'])->name('edit');
+    Route::put('/{id}/update', [StudentController::class, 'update'])->name('update');
+    Route::get('/{id}/view', [StudentController::class, 'show'])->name('view');
+    Route::delete('/{id}/delete', [StudentController::class, 'destroy'])->name('delete');
+});
+
+// Teacher Routes
+Route::prefix('teachers')->name('teachers.')->group(function () {
+    Route::get('/', [TeacherController::class, 'index'])->name('list');
+    Route::get('/add', [TeacherController::class, 'create'])->name('add');
+    Route::post('/store', [TeacherController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [TeacherController::class, 'edit'])->name('edit');
+    Route::put('/{id}/update', [TeacherController::class, 'update'])->name('update');
+    Route::delete('/{id}/delete', [TeacherController::class, 'destroy'])->name('delete');
+});
+
+// Course Routes
+Route::prefix('courses')->name('courses.')->group(function () {
+    Route::get('/', [CourseController::class, 'index'])->name('list');
+    Route::get('/add', [CourseController::class, 'create'])->name('add');
+    Route::post('/store', [CourseController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [CourseController::class, 'edit'])->name('edit');
+    Route::put('/{id}/update', [CourseController::class, 'update'])->name('update');
+    Route::get('/{id}/view', [CourseController::class, 'show'])->name('view');
+    Route::delete('/{id}/delete', [CourseController::class, 'destroy'])->name('delete');
+});
+
 
