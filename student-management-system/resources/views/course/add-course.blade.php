@@ -72,6 +72,18 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <label for="form_duration" class="mb-2">Course Duration *</label>
+                                                        <select id="form_duration" name="duration" class="form-control" required="required" aria-required="true">
+                                                            <option value="" disabled selected>Please select a duration *</option>
+                                                            <option value="3">3 Months</option>
+                                                            <option value="6">6 Months</option>
+                                                            <option value="12">12 Months</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                        
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
                                                         <label for="form_teacher_select" class="mb-2">Teacher *</label>
                                                         <select id="form_teacher_select" name="teacher" class="form-control" required="required" aria-required="true">
                                                             <option value="" disabled selected>Please select a Teacher *</option>
@@ -83,7 +95,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-19 mt-2">
+                                            <div class="col-md-19 mt-3">
                                                 <input type="submit" class="btn btn-success btn-send pt-2 btn-block mb-2 me-md-2" value="Submit">
                                                 <input type="reset" class="btn btn-warning btn-send pt-2 btn-block mb-2" value="Reset">
                                             </div>

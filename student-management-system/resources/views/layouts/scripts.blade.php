@@ -7,10 +7,30 @@
 <script src="{{ asset('assets/js/datatables-simple-demo.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
 
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 </script>
+
+<script>
+    // Set notifier position to top-right
+    alertify.set('notifier', 'position', 'top-right');
+
+    // Show validation errors using AlertifyJS
+    @if ($errors->any())
+        alertify.error('{{ implode(", ", $errors->all()) }}');
+    @endif
+
+    // Show success message using AlertifyJS
+    @if (session('success'))
+        alertify.success('{{ session('success') }}');
+    @endif
+</script>
+
+
+
 
 
 

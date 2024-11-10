@@ -11,45 +11,53 @@ use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout', 'dashboard');
-    }
-
+    // Display login form
     public function showLoginForm(): View
     {
         return view('admin.login');
     }
 
+    // Handle login request
     public function login(Request $request): RedirectResponse
     {
-        $credentials = $request->validate([
+        // Validate the incoming request data
+        $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|string|min:8',
         ]);
 
+        // Prepare the credentials array
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        // Attempt to log the user in with provided credentials
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'));
+
+            return redirect()->intended('dashboard')
+            ->withSuccess('You have Successfully loggedin');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return redirect("login")->withErrors('Oops! You have entered invalid credentials');
     }
 
+    // Display the dashboard view after successful login
     public function dashboard(): View
     {
         return view('admin.dashboard');
     }
 
+    // Display the registration form
     public function showRegistrationForm(): View
     {
         return view('admin.register');
     }
 
+    // Handle user registration
     public function postRegistration(Request $request): RedirectResponse
     {
+        // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -57,6 +65,7 @@ class AuthController extends Controller
             'role' => 'required|string'
         ]);
 
+        // Create a new user instance and hash the password
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
@@ -64,15 +73,22 @@ class AuthController extends Controller
             'role' => $validatedData['role'],
         ]);
 
+        // Log the user in after registration
         Auth::login($user);
+
+        // Regenerate session after login
+        $request->session()->regenerate();
 
         return redirect()->route('dashboard')->with('success', 'Registration successful!');
     }
 
+    // Handle logout
     public function logout(Request $request): RedirectResponse
     {
+        // Log out the user
         Auth::logout();
 
+        // Invalidate the session and regenerate the CSRF token
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

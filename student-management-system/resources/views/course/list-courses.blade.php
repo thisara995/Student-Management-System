@@ -37,6 +37,7 @@
                                                     <th>Title</th>
                                                     <th>Description</th>
                                                     <th>Syllabus</th>
+                                                    <th>Duration</th>
                                                     <th>Teacher</th>
                                                     <th>Action</th> 
                                                 </tr>
@@ -48,6 +49,7 @@
                                                     <th>Title</th>
                                                     <th>Description</th>
                                                     <th>Syllabus</th>
+                                                    <th>Duration</th>
                                                     <th>Teacher</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -60,6 +62,7 @@
                                     <td>{{$item->title}}</td>
                                     <td>{{$item->description}}</td>
                                     <td>{{$item->syllabus}}</td>
+                                    <td>{{$item->duration}}  months</td>
                                     <td>{{$item->teacher->name}}</td>
                                     <td>
                                         <div class="btn-group">

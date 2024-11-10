@@ -43,7 +43,7 @@ class StudentController extends Controller
             return redirect()->route('students.list')->with('error', 'Student not found.');
         }
     
-        return view('students.edit-student', compact('student')); // Pass student data to the view
+        return view('students.edit-student', compact('student')); 
     }
 
     public function update(Request $request, $id)

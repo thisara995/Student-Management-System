@@ -35,16 +35,19 @@ class TeacherController extends Controller
         $teacher->address   = $request->input('address');
         $teacher->mobile    = $request->input('mobile');
         $teacher->save();
-        return redirect()->route('teachers.list')->with('status', 'Teacher added successfully!');
+        return redirect()->route('teachers.list')->withSuccess( 'Teacher added successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id) 
     {
-        //
-    }
+        $teacher = Teacher::find($id);
+       
+        return view('teacher.view-teacher')->with('teacher', $teacher);
+    
+       }
 
     /**
      * Show the form for editing the specified resource.
@@ -68,7 +71,7 @@ class TeacherController extends Controller
 
         // Check if the teacher exists
         if (!$teacher) {
-            return redirect()->route('teachers.list')->with('error', 'Teacher not found.');
+            return redirect()->route('teachers.list')->withErrors( 'Teacher not found.');
         }
 
         // Update the teacher's details
@@ -81,7 +84,7 @@ class TeacherController extends Controller
         $teacher->update();
 
         // Redirect with a success message
-        return redirect()->route('teachers.list')->with('status', 'Teacher data updated successfully.');
+        return redirect()->route('teachers.list')->withSuccess('Teacher data updated successfully.');
     }
 
     /**

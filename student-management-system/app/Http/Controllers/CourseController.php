@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Teacher;
 
-
 class CourseController extends Controller
 {
     /**
@@ -18,12 +17,18 @@ class CourseController extends Controller
         return view('course.list-courses')->with('courses', $courses);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         $teachers = Teacher::all();
         return view('course.add-course', compact('teachers'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -31,6 +36,7 @@ class CourseController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'syllabus' => 'required|string',
+            'duration' => 'required|numeric',
             'teacher' => 'required|exists:teachers,id',
         ]);
 
@@ -39,87 +45,87 @@ class CourseController extends Controller
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'syllabus' => $request->input('syllabus'),
+            'duration' => $request->input('duration'),
             'teacher_id' => $request->input('teacher'),
         ]);
 
         return redirect()->route('courses.list')->with('status', 'Course added successfully!');
     }
 
-
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-         // Find the course by ID
-    $course = Course::with('teacher')->find($id);
+        $course = Course::with('teacher')->find($id);
 
-    // Check if the course exists
-    if (!$course) {
-        return redirect()->route('courses.list')->with('error', 'Course not found.');
-    }
+        if (!$course) {
+            return redirect()->route('courses.list')->with('error', 'Course not found.');
+        }
 
-    // Return the course details view with the course data
-    return view('course.view-course', compact('course'));
+        return view('course.view-course', compact('course'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-{
-    $course = Course::with('teacher')->find($id);
-    if (!$course) {
-        return redirect()->route('courses.list')->with('error', 'Course not found.');
+    {
+        $course = Course::with('teacher')->find($id);
+        if (!$course) {
+            return redirect()->route('courses.list')->with('error', 'Course not found.');
+        }
+
+        $teachers = Teacher::all();
+        return view('course.edit-course', compact('course', 'teachers'));
     }
-
-    $teachers = Teacher::all();
-    return view('course.edit-course', compact('course', 'teachers'));
-}
-
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    // Validate the form input
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'syllabus' => 'required|string',
-        'teacher' => 'required|exists:teachers,id',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'syllabus' => 'required|string',
+            'duration'=> 'required|numeric',
+            'teacher' => 'required|exists:teachers,id',
+        ]);
 
-    // Find the course by ID
-    $course = Course::find($id);
-    
-    if (!$course) {
-        return redirect()->route('courses.list')->with('error', 'Course not found.');
+        $course = Course::find($id);
+
+        if (!$course) {
+            return redirect()->route('courses.list')->with('error', 'Course not found.');
+        }
+
+        // Update course attributes
+        $course->name = $request->input('name');
+        $course->title = $request->input('title');
+        $course->description = $request->input('description');
+        $course->syllabus = $request->input('syllabus');
+        $course->duration = $request->input('duration');
+        $course->teacher_id = $request->input('teacher');
+
+        // Save changes to the database
+        $course->save();
+
+        return redirect()->route('courses.list')->with('status', 'Course data updated successfully!');
     }
-
-    // Update the course with new values
-    $course->name = $request->input('name');
-    $course->title = $request->input('title');
-    $course->description = $request->input('description');
-    $course->syllabus = $request->input('syllabus');
-    $course->teacher_id = $request->input('teacher');
-
-    // Save the changes to the database
-    $course->save();
-
-    // Redirect back to the course list with a success message
-    return redirect()->route('courses.list')->with('status', 'Course Data updated successfully!');
-}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-       $course = Course::find($id);
-       $course->delete();
-       return redirect()->route('courses.list')->with('course',$course);
+        $course = Course::find($id);
+        
+        if (!$course) {
+            return redirect()->route('courses.list')->with('error', 'Course not found.');
+        }
+
+        $course->delete();
+        return redirect()->route('courses.list')->with('status', 'Course deleted successfully!');
     }
 }

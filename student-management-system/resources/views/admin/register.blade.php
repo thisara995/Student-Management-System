@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="card-footer text-center py-3">
                                     <div class="small">
-                                        <a href="{{ url('/login') }}">Have an account? Go to login</a>
+                                        <a href="{{ url('/') }}">Have an account? Go to login</a>
                                     </div>
                                 </div>
                             </div>
