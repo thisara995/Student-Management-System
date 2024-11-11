@@ -87,7 +87,7 @@
                                 <div class="row">
                                 <div class="col-md-19 mt-2">
                                 <input type="submit" class="btn btn-success btn-send pt-2 btn-block mb-2" value="Submit">
-                                <input type="reset" class="btn btn-warning btn-send pt-2 btn-block mb-2" value="Reset">  
+                                <a href="{{ route('students.list') }}" class="btn btn-warning btn-send pt-2 btn-block mb-2">Cancel</a>  
                                 </div>
 
                                 </div>

@@ -99,7 +99,7 @@
 
                                             <div class="col-md-12 mt-3">
                                                 <input type="submit" class="btn btn-success btn-send pt-2 btn-block mb-2 me-md-2" value="Submit">
-                                                <input type="reset" class="btn btn-warning btn-send pt-2 btn-block mb-2" value="Reset">
+                                                <a href="{{ route('enrollments.list') }}" class="btn btn-warning btn-send pt-2 btn-block mb-2">Cancel</a>
                                             </div>
                                         </div>
                                     </form>

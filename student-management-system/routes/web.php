@@ -9,6 +9,7 @@ use App\Http\Controllers\BatchesController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -17,10 +18,26 @@ use App\Http\Controllers\ReportController;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/profile', [AuthController::class, 'showProfile'])->name('profile');
 Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [AuthController::class, 'postRegistration'])->name('register.post');
 Route::get('dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::put('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
+
+// Dashboard Route 
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+
+// User management routes
+Route::get('/users', [AuthController::class, 'user_index'])->name('users.index');
+Route::get('/users/add', [AuthController::class, 'showAddUserForm'])->name('users.add');
+Route::post('/users/add', [AuthController::class, 'addUser'])->name('users.store');
+Route::get('/users/{id}/edit', [AuthController::class, 'editUser'])->name('users.edit');
+Route::put('/users/{id}/update', [AuthController::class, 'updateUser'])->name('users.update');
+Route::delete('/users/{id}', [AuthController::class, 'deleteUser'])->name('users.delete');
+
 
 
 // Student Routes

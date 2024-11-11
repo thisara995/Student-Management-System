@@ -103,16 +103,15 @@
                 </a>
                 <div class="collapse" id="collapseUsers" aria-labelledby="headingSix" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="user-add.html">Add User</a>
-                        <a class="nav-link" href="user-view.html">View Users</a>
+                        <a class="nav-link" href="{{url('users/add')}}">Add User</a>
+                        <a class="nav-link" href="{{url('/users/')}}">View Users</a>
                     </nav>
                 </div>
 
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            
+            <div class="small">Logged in as: <strong> {{ auth()->user()->role ?? 'N/A' }} </strong> </div>  
         </div>
     </nav>
 </div>

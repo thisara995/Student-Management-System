@@ -43,46 +43,36 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="post" autocomplete="off">
-                                    @csrf
-                                    @method('PUT') <!-- Use PUT for updates -->
+                                    <form action="{{ route('profile.update', $user->id) }}" method="post" autocomplete="off">
+                                        @csrf
+                                        @method('PUT') <!-- Use PUT for updates -->
 
-                                    <div class="mb-3">
-                                        <label for="user_id" class="form-label">User ID</label>
-                                        <input type="text" class="form-control" id="user_id" value="{{ $admin->id }}" readonly>
-                                    </div>
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
+                                        </div>
 
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{ $admin->name }}" required>
-                                    </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+                                        </div>
 
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}" required>
-                                    </div>
+                                        <div class="mb-3">
+                                            <label for="new_password" class="form-label">New Password</label>
+                                            <input type="password" class="form-control" id="new_password" name="new_password">
+                                        </div>
 
-                                    <div class="mb-3">
-                                        <label for="current_password" class="form-label">Current Password</label>
-                                        <input type="password" class="form-control" id="current_password" readonly value="{{ $admin->password }}">
-                                    </div>
+                                        <div class="mb-3">
+                                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                                        </div>
 
-                                    <div class="mb-3">
-                                        <label for="new_password" class="form-label">New Password</label>
-                                        <input type="password" class="form-control" id="new_password" name="new_password">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="confirm_password" class="form-label">Confirm Password</label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success">Save changes</button>
-                                        <button type="reset" class="btn btn-warning">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">Save changes</button>
+                                            <button type="reset" class="btn btn-warning">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -106,27 +96,20 @@
                         <div class="col-md-8">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h3>{{ $admin->name }}</h3>
-                                    <p><a href="#" class="text-primary">{{ $admin->role }}</a></p>
+                                    <h3>{{ $user->name }}</h3>
+                                    <p><a href="#" class="text-primary">{{ $user->role }}</a></p>
                                 </div>
                             </div>
 
                             <div class="tab-content profile-tab mt-2" id="myTabContent">
                                 <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>User Id</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>{{ $admin->id }}</p>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{{ $admin->name }}</p>
+                                            <p>{{ $user->name }}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -134,23 +117,16 @@
                                             <label>Email</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{{ $admin->email }}</p>
+                                            <p>{{ $user->email }}</p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Phone</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>{{ $admin->phone ?? 'Not Available' }}</p>
-                                        </div>
-                                    </div>
+                               
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Profession</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{{ $admin->role }}</p>
+                                            <p>{{ $user->role }}</p>
                                         </div>
                                     </div>
                                 </div>

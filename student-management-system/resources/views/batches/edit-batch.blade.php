@@ -83,7 +83,7 @@
                                         <!-- Submit and Reset Buttons -->
                                         <div class="col-md-12 mt-3 text-center">
                                             <button type="submit" class="btn btn-success me-md-2">Update Batch</button>
-                                            <button type="reset" class="btn btn-warning">Reset</button>
+                                            <a href="{{ route('batches.list') }}" class="btn btn-warning btn-send pt-2 btn-block mb-2">Cancel</a>
                                         </div>
                                     </div>
                                     </form>
