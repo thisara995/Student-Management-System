@@ -22,7 +22,7 @@
             <main>
                 <h1 class="mt-4 px-4">PAYMENTS SECTION</h1>
                 <ol class="breadcrumb mb-4 px-4">
-                    <li class="breadcrumb-item"><a href="">Payment</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('/payments')}}">Payment</a></li>
                     <li class="breadcrumb-item active">View Payment</li>
                 </ol>
                 <div class="container mb-4 mt-2" style="max-width: 50rem;">

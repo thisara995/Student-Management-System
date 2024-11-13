@@ -22,7 +22,7 @@
             <main>
                 <h1 class="mt-4 px-4">BATCH SECTION</h1>
                 <ol class="breadcrumb mb-4 px-4">
-                    <li class="breadcrumb-item"><a href="">Batch</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('/batches')}}">Batch</a></li>
                     <li class="breadcrumb-item active">Add Batch</li>
                 </ol>
                 <div class="container mb-4 mt-2" style="max-width: 50rem;">

@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $totalBatches = Batch::count();
         $totalCourses = Course::count();
         $totalEnrollments = Enrollment::count();
-        $totalPayments = Payment::count();
+        $totalPayments = Payment::sum('amount');
         $totalTeachers = Teacher::count();
         $totalUsers = User::count();
 

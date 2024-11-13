@@ -20,7 +20,7 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">ENROLLMENT SECTION</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="">Enrollment</a></li>
+                        <li class="breadcrumb-item"><a href="{{url(/enrollments)}}">Enrollment</a></li>
                         <li class="breadcrumb-item active">View Enrollments</li>
                     </ol>
 
@@ -61,7 +61,7 @@
                                         <td>{{ $item->batch->name }}</td>
                                         <td>{{ $item->student->name }}</td>
                                         <td>{{ $item->join_date }}</td>
-                                        <td> LKR.{{ $item->fee }}</td>
+                                        <td> LKR.{{ number_format( $item-> fee,2 ) }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <!-- View button with FontAwesome icon -->

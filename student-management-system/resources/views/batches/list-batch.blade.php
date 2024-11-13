@@ -20,7 +20,7 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">BATCH SECTION</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="">Batch</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/batches')}}">Batch</a></li>
                         <li class="breadcrumb-item active">View Batches</li>
                     </ol>
 

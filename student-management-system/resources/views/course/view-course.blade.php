@@ -22,7 +22,7 @@
             <main>
                 <h1 class="mt-4 px-4">COURSE SECTION</h1>
                 <ol class="breadcrumb mb-4 px-4">
-                    <li class="breadcrumb-item"><a href="">Course</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('/courses')}}">Course</a></li>
                     <li class="breadcrumb-item active">Add Course</li>
                 </ol>
                 <div class="container mb-4 mt-2" style="max-width: 50rem;">

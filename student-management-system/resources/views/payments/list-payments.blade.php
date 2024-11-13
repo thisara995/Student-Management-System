@@ -20,7 +20,7 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">PAYMENT SECTION</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="">Payment</a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/payments')}}">Payment</a></li>
                         <li class="breadcrumb-item active">View Payments</li>
                     </ol>
 
@@ -55,7 +55,7 @@
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->enrollment->enroll_no }}</td>
                                         <td>{{ $item->paid_date }}</td>
-                                        <td> LKR.{{ $item->amount }}</td>
+                                        <td> LKR.{{ number_format ($item->amount,2) }}</td>
                                         <td>
                                             <div class="btn-group">
 

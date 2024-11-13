@@ -20,7 +20,7 @@
                             <div class="container-fluid px-4">
                                 <h1 class="mt-4">COURSE SECTION</h1>
                                 <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb-item"><a href="">Course</a></li>
+                                    <li class="breadcrumb-item"><a href="{{url('/courses')}}">Course</a></li>
                                     <li class="breadcrumb-item active">View Courses</li>
                                 </ol>
 

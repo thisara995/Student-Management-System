@@ -22,7 +22,7 @@
             <main>
                 <h1 class="mt-4 px-4">ENROLLMENT SECTION</h1>
                 <ol class="breadcrumb mb-4 px-4">
-                    <li class="breadcrumb-item"><a href="">Enrollemnt</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('/enrollments')}}">Enrollemnt</a></li>
                     <li class="breadcrumb-item active">View Enrollemnt</li>
                 </ol>
                 <div class="container mb-4 mt-2" style="max-width: 50rem;">
