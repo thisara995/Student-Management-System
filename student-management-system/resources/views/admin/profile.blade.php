@@ -43,9 +43,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                    <form action="{{ route('profile.update', $user->id) }}" method="post" autocomplete="off">
+                                <form action="{{ route('profile.update', $user->id) }}" method="post" autocomplete="off">
                                         @csrf
-                                        @method('PUT') <!-- Use PUT for updates -->
+                                        @method('PUT')
 
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Name</label>
@@ -63,8 +63,8 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="confirm_password" class="form-label">Confirm Password</label>
-                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                                            <label for="new_password_confirmation" class="form-label">Confirm Password</label>
+                                            <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation">
                                         </div>
 
                                         <div class="modal-footer">

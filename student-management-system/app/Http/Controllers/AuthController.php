@@ -71,7 +71,7 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard')->with('success', 'Registration successful!');
+        return redirect()->route('login')->with('success', 'Registration successful!');
     }
 
     // Handle logout
@@ -84,28 +84,29 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Logged out successfully');
     }
 
-    // Update user profile
     public function updateProfile(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'new_password' => 'nullable|string|min:8|confirmed',
-        ]);
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        'new_password' => 'nullable|string|min:8|confirmed', // Ensure confirmation
+    ]);
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
 
-        if ($request->filled('new_password')) {
-            $user->password = Hash::make($request->input('new_password'));
-        }
-
-        $user->save();
-
-        return redirect()->route('profile')->with('success', 'Profile updated successfully.');
+    // Update the password if 'new_password' is filled and confirmed
+    if ($request->filled('new_password')) {
+        $user->password = Hash::make($request->input('new_password'));
     }
+
+    $user->save();
+
+    return redirect()->route('profile')->with('success', 'Profile updated successfully.');
+}
+
 
     // Show form to add a new user
 
@@ -161,22 +162,22 @@ class AuthController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'role' => 'required|string|in:Admin,Assistant',
-            'new_password' => 'nullable|string|min:8|confirmed',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'new_password' => 'nullable|string|min:8|confirmed', // Ensure confirmation
         ]);
-
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->role = $validatedData['role'];
-
+    
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+    
+        // Update the password if 'new_password' is filled and confirmed
         if ($request->filled('new_password')) {
-            $user->password = Hash::make($validatedData['new_password']);
+            $user->password = Hash::make($request->input('new_password'));
         }
-
+    
         $user->save();
+    
 
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
