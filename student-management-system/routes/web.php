@@ -36,6 +36,7 @@ Route::get('/users/add', [AuthController::class, 'showAddUserForm'])->name('user
 Route::post('/users/add', [AuthController::class, 'addUser'])->name('users.store');
 Route::get('/users/{id}/edit', [AuthController::class, 'editUser'])->name('users.edit');
 Route::put('/users/{id}/update', [AuthController::class, 'updateUser'])->name('users.update');
+Route::get('/users/{id}', [AuthController::class, 'view_user'])->name('users.view');
 Route::delete('/users/{id}', [AuthController::class, 'deleteUser'])->name('users.delete');
 
 

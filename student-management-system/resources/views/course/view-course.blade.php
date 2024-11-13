@@ -39,9 +39,6 @@
                             <p class="card-text mb-3"><strong>Teacher: </strong>{{ $course->teacher->name }}</p>
                             <a href="{{ route('courses.list') }}" class="btn btn-outline-primary btn-block mt-4">Back to Courses</a>
                         </div>
-                        <div class="card-footer text-muted text-center">
-                            <small>Updated {{ $course->updated_at->diffForHumans() }}</small>
-                        </div>
                     </div>
                 </div>
             </main>

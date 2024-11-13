@@ -37,9 +37,6 @@
                             <p class="card-text mb-3"><strong>Amount: </strong>LKR  {{ $payment->amount }}</p>
                             <a href="{{ route('payments.list') }}" class="btn btn-outline-primary btn-block mt-4">Back to Payments</a>
                         </div>
-                        <div class="card-footer text-muted text-center">
-                            <small>Updated {{ $payment->updated_at->diffForHumans() }}</small>
-                        </div>
                     </div>
                 </div>
             </main>

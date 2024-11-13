@@ -20,7 +20,7 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">ENROLLMENT SECTION</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{url(/enrollments)}}">Enrollment</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('enrollments.list')}}">Enrollment</a></li>
                         <li class="breadcrumb-item active">View Enrollments</li>
                     </ol>
 

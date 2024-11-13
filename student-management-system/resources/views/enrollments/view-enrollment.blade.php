@@ -38,9 +38,6 @@
                             <p class="card-text mb-3"><strong>Fee: </strong>LKR  {{ $enrollment->fee }}</p>
                             <a href="{{ route('enrollments.list') }}" class="btn btn-outline-primary btn-block mt-4">Back to enrollments</a>
                         </div>
-                        <div class="card-footer text-muted text-center">
-                            <small>Updated {{ $enrollment->updated_at->diffForHumans() }}</small>
-                        </div>
                     </div>
                 </div>
             </main>

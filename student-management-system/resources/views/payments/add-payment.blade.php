@@ -35,7 +35,7 @@
                         <div class="col-lg-7 mx-auto">
                             <div class="card mt-2 mx-auto p-4 bg-light">
                                 <div class="card-body bg-light">
-                                    <form action="route(payments.store)" method="post" id="payment-form" role="form" autocomplete="off">
+                                    <form action="{{url('/payments/add')}}" method="post" id="payment-form" role="form" autocomplete="off">
                                         @csrf
                                         <div class="controls">
                                             

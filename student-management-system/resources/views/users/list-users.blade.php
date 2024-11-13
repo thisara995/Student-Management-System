@@ -20,7 +20,7 @@
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">USER SECTION</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="{{url('/users')}}">User</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('/users') }}">User</a></li>
                         <li class="breadcrumb-item active">View Users</li>
                     </ol>
 
@@ -54,7 +54,7 @@
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->email}}</td>
+                                            <td>{{ $item->email }}</td>
                                             <td>
                                                 <span class="badge 
                                                     @if ($item->role == 'admin') text-bg-success
@@ -65,11 +65,10 @@
                                                 </span>
                                             </td>
 
-
                                             <td>
                                                 <div class="btn-group">
                                                     <!-- View button with FontAwesome icon -->
-                                                    <a href="{{ url('/batches/'.$item->id.'/view') }}" class="btn btn-secondary btn-sm me-2" title="View">
+                                                    <a href="{{ route('users.view', $item->id) }}" class="btn btn-secondary btn-sm me-2" title="View">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                     
@@ -79,7 +78,7 @@
                                                     </a>
                                                     
                                                     <!-- Delete button with FontAwesome icon -->
-                                                    <form action="{{ url('/batches/'.$item->id.'/delete') }}" method="POST" id="delete-form-{{ $item->id }}" class="d-inline">
+                                                    <form action="{{ url('/users/'.$item->id.'/delete') }}" method="POST" id="delete-form-{{ $item->id }}" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $item->id }})" title="Delete">
@@ -109,7 +108,7 @@
         function confirmDelete(itemId) {
             swal({
                 title: "Are you sure?",
-                text: "You will not be able to recover this Course's data!",
+                text: "You will not be able to recover this user's data!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -118,9 +117,9 @@
                 if (willDelete) {
                     // Submit the form
                     document.getElementById('delete-form-' + itemId).submit();
-                    swal("Deleted!", "The Course has been deleted.", "success");
+                    swal("Deleted!", "The user has been deleted.", "success");
                 } else {
-                    swal("The Course data is safe!");
+                    swal("The user's data is safe!");
                 }
             });
         }

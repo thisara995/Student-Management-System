@@ -32,7 +32,7 @@ class StudentController extends Controller
         $student->parent    = $request->input('parent');
         $student->parent_mobile = $request->input('parent_mobile');
         $student->save();
-        return redirect()->route('students.list')->with('status', 'Student added successfully!');
+        return redirect()->route('students.list')->with('success', 'Student added successfully!');
     }
 
     public function edit($id) {
@@ -56,7 +56,7 @@ class StudentController extends Controller
         $student->parent    = $request->input('parent');
         $student->parent_mobile = $request->input('parent_mobile');
         $student->update();
-        return redirect()->route('students.list')->with('status','Student Updated Successfully');
+        return redirect()->route('students.list')->with('success','Student Updated Successfully');
     }
 
     public function show($id) 
@@ -71,7 +71,7 @@ class StudentController extends Controller
    {
        $student = Student::find($id);
        $student->delete();
-       return redirect()->route('students.list')->with('student',$student);
+       return redirect()->route('students.list')->with('success', 'Student deleted successfully.');
        
    }
 }   

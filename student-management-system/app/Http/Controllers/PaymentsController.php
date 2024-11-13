@@ -43,7 +43,7 @@ class PaymentsController extends Controller
             'amount' => $request->amount,
         ]);
 
-        return redirect()->route('payments.index')->with('success', 'Payment recorded successfully.');
+        return redirect()->route('payments.list')->with('success', 'Payment recorded successfully.');
     }
 
     /**

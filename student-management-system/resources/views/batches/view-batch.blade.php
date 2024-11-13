@@ -38,9 +38,6 @@
                         
                             <a href="{{ route('batches.list') }}" class="btn btn-outline-primary btn-block mt-4">Back to Batches</a>
                         </div>
-                        <div class="card-footer text-muted text-center">
-                            <small>Updated {{ $batch->updated_at->diffForHumans() }}</small>
-                        </div>
                     </div>
                 </div>
             </main>

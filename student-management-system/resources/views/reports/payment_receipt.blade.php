@@ -48,7 +48,7 @@
         </tr>
         <tr>
             <td>{{ $payment->enrollment->batch->name }}</td>
-            <td>{{ $payment->amount }}</td>
+            <td>LKR.{{ $payment->amount }}</td>
         </tr>
     </table>
 

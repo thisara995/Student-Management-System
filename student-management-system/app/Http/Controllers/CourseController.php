@@ -111,7 +111,7 @@ class CourseController extends Controller
         // Save changes to the database
         $course->save();
 
-        return redirect()->route('courses.list')->with('status', 'Course data updated successfully!');
+        return redirect()->route('courses.list')->with('success', 'Course data updated successfully!');
     }
 
     /**
@@ -126,6 +126,6 @@ class CourseController extends Controller
         }
 
         $course->delete();
-        return redirect()->route('courses.list')->with('status', 'Course deleted successfully!');
+        return redirect()->route('courses.list')->with('success', 'Course deleted successfully!');
     }
 }

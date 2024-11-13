@@ -51,7 +51,7 @@ class BatchesController extends Controller
         ]);
 
         // Redirect to the list of batches with a success message
-        return redirect()->route('batches.list')->with('status', 'Batch created successfully!');
+        return redirect()->route('batches.list')->with('success', 'Batch created successfully!');
     }
 
     /**
@@ -104,7 +104,7 @@ class BatchesController extends Controller
         ]);
 
         // Redirect to the list of batches with a success message
-        return redirect()->route('batches.list')->with('status', 'Batch updated successfully!');
+        return redirect()->route('batches.list')->with('success', 'Batch updated successfully!');
     }
 
     /**
@@ -119,6 +119,6 @@ class BatchesController extends Controller
         }
 
         $batch->delete();
-        return redirect()->route('batches.list')->with('status', 'Batch deleted successfully!');
+        return redirect()->route('batches.list')->with('success', 'Batch deleted successfully!');
     }
 }
